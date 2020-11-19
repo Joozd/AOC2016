@@ -14,6 +14,7 @@ class Main {
                 "6" -> day6.Day6(6).run()
                 "7" -> day7.Day7(7).run()
                 "8" -> day8.Day8(8).run()
+                "9" -> day9.Day9(9).run()
 
                 "0" -> {
                     val totalTime = day1.Day1(1).run() +
@@ -23,7 +24,8 @@ class Main {
                             day5.Day5(5).run() +
                             day6.Day6(6).run() +
                             day7.Day7(7).run() +
-                            day8.Day8(8).run()
+                            day8.Day8(8).run() +
+                            day9.Day9(9).run()
 
                     println("\n\nDone, total time: ${totalTime.toMillis()}.${totalTime.toNanosPart()} milliseconds.")
                 }
