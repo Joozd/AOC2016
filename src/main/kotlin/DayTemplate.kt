@@ -27,8 +27,8 @@ class Day1(day: Int): Solution(day) {
     override val second: String
         get() = two()
 
-    private fun one() = "Answer to question 1"
+    private fun one(): String = "Answer to question 1"
 
-    private fun two() = "Answer to question 2"
+    private fun two(): String = "Answer to question 2"
 }
 */
