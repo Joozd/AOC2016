@@ -1,7 +1,6 @@
 package day10
 
 import utils.extensions.getOnlyNumbers
-import utils.extensions.isDigits
 
 class Bot(private val botsMap: Map<Int, Bot>, private val outputMap: MutableMap<Int, Int>, val id: Int, private val lowTarget: Int, private val highTarget: Int, private val lowToOutput: Boolean, private val highToOutput: Boolean) {
     private val chips = ArrayList<Int>(2)
