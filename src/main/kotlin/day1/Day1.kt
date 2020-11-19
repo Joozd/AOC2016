@@ -5,10 +5,12 @@ import shared.Coordinate
 import utils.extensions.abs
 
 class Day1(day: Int): Solution(day) {
-    val inputs = inputString.split(", ")
+    private val inputs = inputString.split(", ")
 
-    override val first = one()
-    override val second = two()
+    override val first: String
+        get() = one()
+    override val second: String
+        get() = two()
 
     private fun one(): String {
         var pos = Coordinate(0,0)

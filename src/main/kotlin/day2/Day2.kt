@@ -14,8 +14,10 @@ class Day2(day: Int): Solution(day) {
   A B C
     D"""
 
-    override val first = one()
-    override val second = two()
+    override val first: String
+        get() = one()
+    override val second: String
+        get() = two()
 
     private fun one() = inputs.map{cc ->
         Keypad().apply{

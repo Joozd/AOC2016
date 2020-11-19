@@ -22,8 +22,10 @@ import Solution
 class Day1(day: Int): Solution(day) {
     // val extraInput = getExtraInputLinesForDay(dayNumber, "a")
 
-    override val first = one()
-    override val second = two()
+    override val first: String
+        get() = one()
+    override val second: String
+        get() = two()
 
     private fun one() = "Answer to question 1"
 
