@@ -10,7 +10,7 @@ class Day13(day: Int): Solution(day) {
     init{
         extra = inputString.toInt() // 10 for test
     }
-    // val extraInput = getExtraInputLinesForDay(dayNumber, "a")
+    private val startPoint = Day13Coordinate(1,1)
 
     override val first: String
         get() = one()
@@ -19,34 +19,26 @@ class Day13(day: Int): Solution(day) {
 
     private fun one(): String {
         val target = Day13Coordinate(31,39)
-        val startPoint = Day13Coordinate(1,1)
         val foundCoordinates = HashSet<Day13Coordinate>().apply { add(startPoint) }
         var visitingList = setOf(startPoint)
         var steps = 0
         while (target !in visitingList) {
             foundCoordinates.addAll(visitingList)
             visitingList = visitingList.map {
-                // it.visited = true
                 it.neighbours
             }.flatten().filter { it !in foundCoordinates }.toSet()
             steps++
-            if (visitingList.isEmpty()) return "ERROR AUB"
         }
         return steps.toString()
-
-
-
 
     }
     private fun two(): String {
         val target = 50 // steps
-        val startPoint = Day13Coordinate(1,1)
         val foundCoordinates = HashSet<Day13Coordinate>().apply { add(startPoint) }
         var visitingList = setOf(startPoint)
         repeat(target) {
             foundCoordinates.addAll(visitingList)
             visitingList = visitingList.map {
-                // it.visited = true
                 it.neighbours
             }.flatten().filter { it !in foundCoordinates }.toSet()
             if (visitingList.isEmpty()) return "ERROR AUB"
