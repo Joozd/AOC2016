@@ -17,6 +17,9 @@ class Day13(day: Int): Solution(day) {
     override val second: String
         get() = two()
 
+    /**
+     * Flood the maze until reaching target
+     */
     private fun one(): String {
         val target = Day13Coordinate(31,39)
         val foundCoordinates = HashSet<Day13Coordinate>().apply { add(startPoint) }
@@ -30,8 +33,11 @@ class Day13(day: Int): Solution(day) {
             steps++
         }
         return steps.toString()
-
     }
+
+    /**
+     * Flood the maze for 50 steps
+     */
     private fun two(): String {
         val target = 50 // steps
         val foundCoordinates = HashSet<Day13Coordinate>().apply { add(startPoint) }
