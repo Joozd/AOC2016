@@ -1,6 +1,6 @@
 package utils
 
-class LookForwardCache<T>(override val size: Int, private val function: (Int) -> T): Iterable<T>, Collection<T> {
+class SingleThreadLookForwardCache<T>(override val size: Int, private val function: (Int) -> T): Iterable<T>, Collection<T> {
     private val buffer = ArrayList<T>(size)
     //fill first [size] fields
     init{
