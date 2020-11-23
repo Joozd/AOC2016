@@ -1,34 +1,33 @@
 package utils.dijkstra
 
-import java.util.*
-
 object Dijkstra{
     /**
      * Get a route from [start] to [end]
      * if [nodesAreGenerated] is false this wil need to be fed existing nodes that stay the same object every time they are found. If unsure, leave false (only an unknown performance penalty)
      */
-    fun <T: Number> getRoute(start: DijkstraNode<T>, end: DijkstraNode<T>, nodesAreGenerated: Boolean = true): List<DijkstraNode<T>>? =
-        getRoute(start, nodesAreGenerated) { it == end }
+    fun <T: Number> shortestRoute(start: DijkstraNode<T>, end: DijkstraNode<T>, nodesAreGenerated: Boolean = true): List<DijkstraNode<T>>? =
+            shortestRoute(start, nodesAreGenerated) { it == end }
 
 
     /**
      * Get a list from start to the first place that satisfies [endCondition]
      * if [nodesAreGenerated] is false this wil need to be fed existing nodes that stay the same object every time they are found. If unsure, leave false (only an unknown performance penalty)
      */
-    fun <T: Number> getRoute(start: DijkstraNode<T>, nodesAreGenerated: Boolean = true, endCondition: (DijkstraNode<T>) -> Boolean): List<DijkstraNode<T>>?{
+    fun <T: Number> shortestRoute(start: DijkstraNode<T>, nodesAreGenerated: Boolean = true, endCondition: (DijkstraNode<T>) -> Boolean): List<DijkstraNode<T>>?{
         var activeNode: DijkstraNode<T>? = start
         val visitingList = hashSetOf<DijkstraNode<T>>()
         val knownNodes = hashSetOf(start)
         while(activeNode != null && !endCondition(activeNode)){
 
-            print("looking at $activeNode, knownNodes has ${knownNodes.size}, visitingList has ${visitingList.size}\n")
+            //print("looking at $activeNode, knownNodes has ${knownNodes.size}, visitingList has ${visitingList.size}\n")
 
-            print("Neighbours: ${activeNode.getNeighbours().map{it.node}}\n")
+            //print("Neighbours: ${activeNode.getNeighbours().map{it.node}}\n")
 
             activeNode.getNeighbours().forEach { neighbour ->
-                val node = if(nodesAreGenerated)
-                    knownNodes.firstOrNull{ it == neighbour.node } ?: neighbour.node.also { knownNodes.add(it)} // Use the version that is in knownNodes
-                    else neighbour.node
+                val node = if (nodesAreGenerated)
+                    knownNodes.firstOrNull { it == neighbour.node }
+                            ?: neighbour.node.also { knownNodes.add(it) } // Use the version that is in knownNodes
+                else neighbour.node
                 if (node.isUnvisited()) {
                     visitingList.add(node)
                     if (node.distanceToStart == 0 || node.distanceToStart.toDouble() > activeNode!!.distanceToStart.toDouble() + neighbour.distance.toDouble()) {
@@ -36,10 +35,9 @@ object Dijkstra{
                         node.previousNode = activeNode
                     }
                 }
-                activeNode!!.visited()
-                println("should be visited: $activeNode\n")
-                visitingList.remove(activeNode)
             }
+            activeNode.visited()
+            visitingList.remove(activeNode)
             activeNode = visitingList.minByOrNull { it.distanceToStart.toDouble() }
         }
 
