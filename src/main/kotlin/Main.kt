@@ -6,7 +6,9 @@ class Main {
         @JvmStatic
         fun main(args: Array<String>) {
             println("Please enter the day you want the solutions for. 0 for all!")
-            when (readLine()) {
+            val input = readLine()
+            println("got input $input")
+            when (input) {
                 "1" -> day1.Day1(1).run()
                 "2" -> day2.Day2(2).run()
                 "3" -> day3.Day3(3).run()
@@ -22,6 +24,7 @@ class Main {
                 "13" -> day13.Day13(13).run()
                 "14" -> day14.Day14(14).run()
                 "15" -> day15.Day15(15).run()
+                "16" -> day16.Day16(16).run()
 
                 "0" -> {
                     val totalTime = day1.Day1(1).run() +
@@ -38,7 +41,8 @@ class Main {
                             day12.Day12(12).run() +
                             day13.Day13(13).run() +
                             day14.Day14(14).run() +
-                            day15.Day15(15).run()
+                            day15.Day15(15).run() +
+                            day16.Day16(16).run()
 
                     println("\n\nDone, total time: ${totalTime.toMillis()}.${totalTime.toNanosPart()} milliseconds.")
                 }

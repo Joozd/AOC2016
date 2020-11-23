@@ -1,6 +1,7 @@
 package day13
 
 import Solution
+import utils.dijkstra.Dijkstra
 
 /**
  * I am pretty happy with this one! Don't think it'll get much cleaner, whole thing ran in 29 milliseconds :)
@@ -51,6 +52,16 @@ class Day13(day: Int): Solution(day) {
         }
         foundCoordinates.addAll(visitingList)
         return foundCoordinates.size.toString()
+    }
+
+    /**
+     * Test function to test my dijkstra algorithm
+     */
+    private fun bonusOne(): String{
+        val startNode = BonusNode(1,1)
+        val target = BonusNode(31,39)
+        val route = Dijkstra.getRoute(startNode, target, nodesAreGenerated = true) as List<BonusNode>?
+        return route?.last()?.distanceToStart.toString()
     }
 
     companion object{
