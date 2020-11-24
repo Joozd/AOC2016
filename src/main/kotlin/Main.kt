@@ -28,6 +28,7 @@ class Main {
                 "17" -> day17.Day17(17).run()
                 "18" -> day18.Day18(18).run()
                 "19" -> day19.Day19(19).run()
+                "20" -> day20.Day20(20).run()
 
                 "0" -> {
                     val totalTime = day1.Day1(1).run() +
