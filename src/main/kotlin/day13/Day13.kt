@@ -1,7 +1,7 @@
 package day13
 
 import Solution
-import utils.dijkstra.Dijkstra
+import utils.dijkstra.Pathfinding
 
 /**
  * I am pretty happy with this one! Don't think it'll get much cleaner, whole thing ran in 29 milliseconds :)
@@ -14,7 +14,7 @@ class Day13(day: Int): Solution(day) {
     private val startPoint = Day13Coordinate(1,1)
 
     override val first: String
-        get() = one()
+        get() = bonusOne() // one()
     override val second: String
         get() = two()
 
@@ -53,18 +53,18 @@ class Day13(day: Int): Solution(day) {
         foundCoordinates.addAll(visitingList)
         return foundCoordinates.size.toString()
     }
-/*
+
     /**
      * Test function to test my dijkstra algorithm
      */
     private fun bonusOne(): String{
         val startNode = BonusNode(1,1)
         val target = BonusNode(31,39)
-        val route = Dijkstra.shortestRoute(startNode, target, nodesAreGenerated = true) as List<BonusNode>?
+        val route = Pathfinding.gridRoute(startNode, target, nodesAreGenerated = true) as List<BonusNode>?
         return route?.last()?.distanceToStart.toString()
     }
 
- */
+
 
     companion object{
         var extra: Int? = null

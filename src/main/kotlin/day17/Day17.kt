@@ -1,7 +1,7 @@
 package day17
 
 import Solution
-import utils.dijkstra.Dijkstra
+import utils.dijkstra.Pathfinding
 
 @ExperimentalUnsignedTypes
 class Day17(day: Int): Solution(day) {
@@ -13,7 +13,7 @@ class Day17(day: Int): Solution(day) {
 
     private fun one(): String {
         val start = Day17Node(0,0, inputString, "")
-        val result = Dijkstra.shortestRoute(start, true){
+        val result = Pathfinding.dijkstraRoute(start, true){
             (it as Day17Node).goal
         }
         return (result?.last() as Day17Node?)?.route.toString()

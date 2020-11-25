@@ -1,9 +1,6 @@
 package utils.dijkstra
 
-/**
- * Basic Dijkstra implementation with distance type Int
- */
-abstract class BasicDijkstraNode: DijkstraNode<Int> {
+abstract class BasicGridNode() : GridNode {
     override var distanceToStart: Int = 0
     override var previousNode: BasicNode<Int>? = null
 
@@ -15,9 +12,8 @@ abstract class BasicDijkstraNode: DijkstraNode<Int> {
 
     override fun isUnvisited(): Boolean = unvisited
 
+
     /**
      * Return all of this nodes neighbours
      */
-    abstract override fun getNeighbours(): List<DijkstraNode.Neighbour<Int>>
-
 }
