@@ -12,6 +12,12 @@ abstract class BasicGridNode() : GridNode {
 
     override fun isUnvisited(): Boolean = unvisited
 
+    override fun reset() {
+        distanceToStart = 0
+        previousNode = null
+        unvisited = true
+    }
+
 
     /**
      * Return all of this nodes neighbours

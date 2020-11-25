@@ -13,7 +13,7 @@ interface BasicNode<T: Number> {
 
     /**
      * This will be called when the shortest route to this DijkstraNode has been found
-     * set [this.previousNode] to [from]
+     * This should mark this node so [isUnvisited] will return false
      */
     fun visited()
 
@@ -21,4 +21,9 @@ interface BasicNode<T: Number> {
      * should be true is this DijkstraNode has not yet been visited (eg. if visit() has not yet been called)
      */
     fun isUnvisited(): Boolean
+
+    /**
+     * reset all pathfinding values to start so we can find another path
+     */
+    fun reset()
 }

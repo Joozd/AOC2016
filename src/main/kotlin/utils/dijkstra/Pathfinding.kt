@@ -4,7 +4,7 @@ object Pathfinding{
     /**
      * Get a route from [start] to [end]
      * if [nodesAreGenerated] is false this wil need to be fed existing nodes that stay the same object every time they are found.
-     *  If unsure, leave true (only an unknown performance penalty and uses more memory)
+     * and they will be reset after search
      *
      * Dijkstra is an algorithm that guarantees the shortest route, and supports different distances between each node-pair.
      * Does a lot of searches in the wrong direction.
@@ -16,7 +16,7 @@ object Pathfinding{
     /**
      * Get a list from start to the first place that satisfies [endCondition]
      * if [nodesAreGenerated] is false this wil need to be fed existing nodes that stay the same object every time they are found.
-     *  If unsure, leave true (only an unknown performance penalty and uses more memory)
+     * and they will be reset after search
      *
      * Dijkstra is an algorithm that guarantees the shortest route, and supports different distances between each node-pair.
      * Does a lot of searches in the wrong direction.
@@ -35,7 +35,7 @@ object Pathfinding{
                 val node = if (nodesAreGenerated)
                     knownNodes.firstOrNull { it == neighbour.node }
                             ?: neighbour.node.also { knownNodes.add(it) } // Use the version that is in knownNodes
-                else neighbour.node
+                else neighbour.node.also { knownNodes.add(it) }
                 if (node.isUnvisited()) {
                     visitingList.add(node)
                     if (node.distanceToStart == 0 || node.distanceToStart.toDouble() > activeNode!!.distanceToStart.toDouble() + neighbour.distance.toDouble()) {
@@ -58,6 +58,11 @@ object Pathfinding{
                 parent = parent.previousNode
             }
             result.reversed()
+        }.also {
+            if (it == null) println("No results found")
+            knownNodes.forEach {
+                it.reset()
+            }
         }
     }
 
@@ -76,15 +81,16 @@ object Pathfinding{
         val knownNodes = hashSetOf(start)
         while(activeNode != null && activeNode != end){
 
-            //print("looking at $activeNode, knownNodes has ${knownNodes.size}, visitingList has ${visitingList.size}\n")
 
-            //print("Neighbours: ${activeNode.getNeighbours().map{it.node}}\n")
+            //print("\nlooking at $activeNode, knownNodes has ${knownNodes.size}, visitingList has ${visitingList.size}\n")
+
+            //print("Neighbours: ${activeNode.getNeighbours().map{it}}\n")
 
             activeNode.getNeighbours().forEach { neighbour ->
                 val node = if (nodesAreGenerated)
                     knownNodes.firstOrNull { it == neighbour }
                             ?: neighbour.also { knownNodes.add(it) } // Use the version that is in knownNodes
-                else neighbour
+                else neighbour.also { knownNodes.add(it) } // Use the version that is in knownNodes
                 if (node.isUnvisited()) {
                     visitingList.add(node)
                     // Not sure if this part is needed
@@ -108,7 +114,13 @@ object Pathfinding{
                 parent = parent.previousNode
             }
             result.reversed()
+        }.also{
+            if (it == null) println("No results found for $start - $end")
+            knownNodes.forEach{
+                it.reset()
+            }
         }
+
     }
 
 

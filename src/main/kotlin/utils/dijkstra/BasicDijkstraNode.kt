@@ -20,4 +20,10 @@ abstract class BasicDijkstraNode: DijkstraNode<Int> {
      */
     abstract override fun getNeighbours(): List<DijkstraNode.Neighbour<Int>>
 
+    override fun reset() {
+        distanceToStart = 0
+        previousNode = null
+        unvisited = true
+    }
+
 }
