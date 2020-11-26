@@ -1,9 +1,9 @@
-package day12
+package shared.assembunny
 
 import utils.extensions.isDigits
 import utils.extensions.splitToWords
 
-class AssembunnyComputer(private val memory: IntArray, private val program: List<Instruction>) {
+class AssembunnyComputer(private val memory: IntArray, private val program: MutableList<Instruction>) {
     fun run(){
         while(memory[INSTRUCTION_ADDRESS] < program.size){
             //println("instruction ${memory[INSTRUCTION_ADDRESS]}: ${program[memory[INSTRUCTION_ADDRESS]]}")
@@ -51,7 +51,7 @@ class AssembunnyComputer(private val memory: IntArray, private val program: List
         }
 
         fun create(m: IntArray, prog: List<String>): AssembunnyComputer =
-            AssembunnyComputer(m, prog.map{ parseInstruction(m, it)})
+            AssembunnyComputer(m, prog.map{ parseInstruction(m, it) }.toMutableList())
 
 
 

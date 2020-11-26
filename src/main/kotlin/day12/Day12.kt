@@ -1,6 +1,8 @@
 package day12
 
 import Solution
+import shared.assembunny.AssemBunnyVM
+import shared.assembunny.AssembunnyComputer
 
 class Day12(day: Int): Solution(day) {
     // val extraInput = getExtraInputLinesForDay(dayNumber, "a")
@@ -12,12 +14,12 @@ class Day12(day: Int): Solution(day) {
 
     private fun one(): String {
         val m = IntArray(5)
-        return AssembunnyComputer.create(m, inputLines).apply{run()}.result
+        return AssemBunnyVM.create(m, inputString).apply{run()}.result
     }
 
     private fun two(): String  {
         val m = IntArray(5)
         m[AssembunnyComputer.getRegister('c')] = 1
-        return AssembunnyComputer.create(m, inputLines).apply{run()}.result
+        return AssemBunnyVM.create(m, inputString).apply{run()}.result
     }
 }
