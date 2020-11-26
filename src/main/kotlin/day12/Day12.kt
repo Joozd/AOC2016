@@ -22,4 +22,13 @@ class Day12(day: Int): Solution(day) {
         m[AssembunnyComputer.getRegister('c')] = 1
         return AssemBunnyVM.create(m, inputString).apply{run()}.result
     }
+
+    companion object{
+        val test = "cpy 41 a\n" +
+                "inc a\n" +
+                "inc a\n" +
+                "dec a\n" +
+                "jnz a 2\n" +
+                "dec a"
+    }
 }
