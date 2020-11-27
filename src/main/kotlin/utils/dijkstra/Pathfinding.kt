@@ -120,7 +120,32 @@ object Pathfinding{
                 it.reset()
             }
         }
+    }
 
+
+    /**
+     * Get a distance only from [start] to [end]
+     * if [nodesAreGenerated] is false this wil need to be fed existing nodes that stay the same object every time they are found.
+     * in that case it will also reset the nodes after pathfinding.
+     *
+     * Grid is an algorithm that will only work in a grid where start and end position are known.
+     * It will always work from the node that has the lowest no-obstacle distance to the target,
+     * so probably will be more efficient than a complete Dijkstra search
+     */
+    fun gridDistance(start: GridNode, end: GridNode, nodesAreGenerated: Boolean): Int?{
+        var visitingList = setOf(start)
+        val knownNodes = hashSetOf(start)
+        var counter = 0
+        while (end !in visitingList && visitingList.isNotEmpty()){
+            knownNodes.addAll(visitingList)
+            val newNodes = visitingList.map{
+                it.visited()
+                it.getNeighbours().filter{n -> n.isUnvisited() } }.flatten().toSet()
+            visitingList = newNodes
+            counter++
+        }
+        if (!nodesAreGenerated) knownNodes.forEach { it.reset() }
+        return if (visitingList.isNotEmpty()) counter else null
     }
 
 
