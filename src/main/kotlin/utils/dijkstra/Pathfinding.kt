@@ -149,9 +149,16 @@ object Pathfinding{
     }
 
 
-
-
-
-
-
+    fun simplifyMaze(maze: List<MazeNode>) {
+        maze.filter { !it.deadEnd }.forEach {
+            if (it.canBeDead && it.getNeighbours().size == 1) {
+                var currentNode = it
+                do {
+                    currentNode.markDeadEnd()
+                    // println("neighbours: ${currentNode.getNeighbours()}")
+                    currentNode = currentNode.getNeighbours().first() as MazeNode
+                } while (currentNode.canBeDead && currentNode.getNeighbours().size == 1)
+            }
+        }
+    }
 }

@@ -41,10 +41,17 @@ class Day24(day: Int): Solution(day) {
     override val second: String
         get() = two()
 
+    // 1435ms without maze optimizing
+    // 1674ms with maze optimizing.
+    //NOTE: This maze does not have a whole lot of dead ends.
     private fun one(): String {
         grid.forEach {
             it.grid = grid
         }
+        // This takes more time than it saves for this problem
+        // Pathfinding.simplifyMaze(grid)
+        // next line prints map with dead ends marked as '@'
+        // gridLines.forEach { println(it.map { it.character }.joinToString("") ) }
 
         val shortest = perms.minByOrNull {
             findDistanceForRoute(it, numbers.first(), pairsWithDistances)
